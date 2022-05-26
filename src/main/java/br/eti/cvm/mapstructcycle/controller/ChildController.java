@@ -3,6 +3,7 @@ package br.eti.cvm.mapstructcycle.controller;
 import br.eti.cvm.mapstructcycle.dto.ChildDto;
 import br.eti.cvm.mapstructcycle.dto.ChildrenDto;
 import br.eti.cvm.mapstructcycle.mapper.ChildMapper;
+import br.eti.cvm.mapstructcycle.mapper.CycleAvoidingMappingContext;
 import br.eti.cvm.mapstructcycle.repository.ChildRepository;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -30,7 +31,7 @@ public class ChildController {
 
         ChildrenDto children = new ChildrenDto();
 
-        childRepository.findAll().forEach(child -> children.add(childMapper.toDto(child)));
+        childRepository.findAll().forEach(child -> children.add(childMapper.toDto(child, new CycleAvoidingMappingContext())));
 
         return children;
     }
