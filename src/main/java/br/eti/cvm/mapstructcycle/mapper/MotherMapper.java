@@ -2,19 +2,22 @@ package br.eti.cvm.mapstructcycle.mapper;
 
 import br.eti.cvm.mapstructcycle.dto.MotherDto;
 import br.eti.cvm.mapstructcycle.model.Mother;
-import org.mapstruct.Mapper;
+import org.mapstruct.*;
 
-import java.util.Set;
-
-@Mapper(uses=ChildMapper.class)
+@Named("MotherMapper")
+@Mapper(uses=ChildMapper.class, unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface MotherMapper {
 
-    Mother toEntity(MotherDto dto);
-
+    @Named("toDto")
+    @Mappings({
+        @Mapping(target = "children", qualifiedByName = {"ChildMapper", "toDtoWithoutMother"})
+    })
     MotherDto toDto(Mother entity);
 
-    Set<Mother> toEntity(Set<MotherDto> entity);
-
-    Set<MotherDto> toDto(Set<Mother> entity);
+    @Named("toDtoWithoutChildren")
+    @Mappings({
+        @Mapping(target = "children", ignore = true)
+    })
+    MotherDto toDtoWithoutChildren(Mother entity);
 
 }

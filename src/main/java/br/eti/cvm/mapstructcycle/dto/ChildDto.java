@@ -11,6 +11,8 @@ import lombok.Setter;
 @Setter
 public class ChildDto {
 
+    private long id;
+
     private String name;
 
     private MotherDto mother;

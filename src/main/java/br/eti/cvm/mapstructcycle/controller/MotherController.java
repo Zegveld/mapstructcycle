@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @RestController
 @RequestMapping("/mother")
 public class MotherController {
@@ -19,8 +22,12 @@ public class MotherController {
     private MotherMapper motherMapper;
 
     @GetMapping()
-    public MotherDto showMother() {
-        return motherMapper.toDto(motherRepository.findById(1L).get());
+    public Set<MotherDto> showMother() {
+        Set<MotherDto> mothers = new HashSet<>();
+
+        motherRepository.findAll().forEach(mother -> mothers.add(motherMapper.toDto(mother)));
+
+        return mothers;
     }
 
 }

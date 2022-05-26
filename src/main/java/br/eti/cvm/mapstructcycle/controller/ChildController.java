@@ -1,18 +1,14 @@
 package br.eti.cvm.mapstructcycle.controller;
 
 import br.eti.cvm.mapstructcycle.dto.ChildDto;
-import br.eti.cvm.mapstructcycle.dto.ChildrenDto;
 import br.eti.cvm.mapstructcycle.mapper.ChildMapper;
 import br.eti.cvm.mapstructcycle.repository.ChildRepository;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @RestController
@@ -26,9 +22,9 @@ public class ChildController {
     private ChildMapper childMapper;
 
     @GetMapping()
-    public ChildrenDto showChildren() {
+    public Set<ChildDto> showChildren() {
 
-        ChildrenDto children = new ChildrenDto();
+        Set<ChildDto> children = new HashSet<>();
 
         childRepository.findAll().forEach(child -> children.add(childMapper.toDto(child)));
 
