@@ -13,6 +13,8 @@ import java.util.Set;
 @Setter
 public class MotherDto {
 
+    private long id;
+
     private String name;
 
     private Set<ChildDto> children;
