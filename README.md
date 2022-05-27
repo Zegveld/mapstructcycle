@@ -9,3 +9,5 @@ The branch attempttosolve1 use the mapstruct-mapping-with-cycles strategy, it so
 The branch attempttosolve2 use the "Update 2" strategy from [Prevent Cyclic references when converting with MapStruct](https://stackoverflow.com/questions/36223752/prevent-cyclic-references-when-converting-with-mapstruct), it solves the both the cycles at data access level and at json level.
 
 Unfortunately, the "Update 2" strategy is some cumbersome when you have a more complex use case, for example: Father->Child->Pet.
+
+I solved the cycle at json level on attempttosolve1 by using @AfterMapping ans setting the ofending dependencies to null. 
