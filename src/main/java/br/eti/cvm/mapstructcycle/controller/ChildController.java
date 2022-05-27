@@ -22,7 +22,7 @@ public class ChildController {
     private ChildMapper childMapper;
 
     @GetMapping()
-    public Set<ChildDto> showChildren() {
+    public Set<ChildDto> listChildren() {
 
         Set<ChildDto> children = new HashSet<>();
 

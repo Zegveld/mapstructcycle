@@ -22,7 +22,7 @@ public class MotherController {
     private MotherMapper motherMapper;
 
     @GetMapping()
-    public Set<MotherDto> showMother() {
+    public Set<MotherDto> listAllMothers() {
         Set<MotherDto> mothers = new HashSet<>();
 
         motherRepository.findAll().forEach(mother -> mothers.add(motherMapper.toDto(mother)));
