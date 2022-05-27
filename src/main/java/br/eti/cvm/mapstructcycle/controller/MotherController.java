@@ -1,6 +1,7 @@
 package br.eti.cvm.mapstructcycle.controller;
 
 import br.eti.cvm.mapstructcycle.dto.MotherDto;
+import br.eti.cvm.mapstructcycle.mapper.CycleAvoidingMappingContext;
 import br.eti.cvm.mapstructcycle.mapper.MotherMapper;
 import br.eti.cvm.mapstructcycle.repository.MotherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,7 @@ public class MotherController {
     public Set<MotherDto> listAllMothers() {
         Set<MotherDto> mothers = new HashSet<>();
 
-        motherRepository.findAll().forEach(mother -> mothers.add(motherMapper.toDto(mother)));
+        motherRepository.findAll().forEach(mother -> mothers.add(motherMapper.toDto(mother, new CycleAvoidingMappingContext())));
 
         return mothers;
     }
